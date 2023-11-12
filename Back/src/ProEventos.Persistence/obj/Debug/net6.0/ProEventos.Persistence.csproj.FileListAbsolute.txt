@@ -1,0 +1,17 @@
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\bin\Debug\net6.0\ProEventos.Persistence.deps.json
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\bin\Debug\net6.0\ProEventos.Persistence.dll
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\bin\Debug\net6.0\ProEventos.Persistence.pdb
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ProEventos.Persistence.csproj.AssemblyReference.cache
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ProEventos.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ProEventos.Persistence.AssemblyInfoInputs.cache
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ProEventos.Persistence.AssemblyInfo.cs
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ProEventos.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ProEventos.Persistence.dll
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\refint\ProEventos.Persistence.dll
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ProEventos.Persistence.pdb
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ref\ProEventos.Persistence.dll
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\bin\Debug\net6.0\ProEventos.Domain.dll
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\bin\Debug\net6.0\ProEventos.Domain.pdb
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ProEventos.Persistence.csproj.CopyComplete
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\bin\Debug\net6.0\ProEventos.Persistence.runtimeconfig.json
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Persistence\obj\Debug\net6.0\ProEventos.Persistence.genruntimeconfig.cache

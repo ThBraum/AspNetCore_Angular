@@ -1,0 +1,12 @@
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\bin\Debug\net6.0\ProEventos.Domain.deps.json
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\bin\Debug\net6.0\ProEventos.Domain.dll
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\bin\Debug\net6.0\ProEventos.Domain.pdb
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\obj\Debug\net6.0\ProEventos.Domain.csproj.AssemblyReference.cache
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\obj\Debug\net6.0\ProEventos.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\obj\Debug\net6.0\ProEventos.Domain.AssemblyInfoInputs.cache
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\obj\Debug\net6.0\ProEventos.Domain.AssemblyInfo.cs
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\obj\Debug\net6.0\ProEventos.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\obj\Debug\net6.0\ProEventos.Domain.dll
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\obj\Debug\net6.0\refint\ProEventos.Domain.dll
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\obj\Debug\net6.0\ProEventos.Domain.pdb
+C:\Users\Braum\Documents\ProEventos\Back\src\ProEventos.Domain\obj\Debug\net6.0\ref\ProEventos.Domain.dll
