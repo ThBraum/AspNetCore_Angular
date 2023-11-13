@@ -3,7 +3,6 @@ using ProEventos.Domain.Models;
 using ProEventos.Persistence;
 using ProEventos.Persistence.Context;
 using ProEventos.Persistence.Contratos;
-
 namespace ProEventos.Persistence;
 
 public class PalestrantePersist : IPalestrantePersistence
@@ -17,26 +16,26 @@ public class PalestrantePersist : IPalestrantePersistence
 
     public async Task<PalestranteModel[]> GetAllPalestrantesAsync(bool includeEventos = false)
     {
-        IQueryable<PalestranteModel> query = _context.Palestrantes.Include(p => p.RedesSociais);
+        IQueryable<PalestranteModel> query = _context.Palestrantes.AsNoTracking().Include(p => p.RedesSociais);
 
         if (includeEventos)
         {
-            query = query.Include(p => p.PalestratesEventos!).ThenInclude(pe => pe.Evento);
+            query = query.Include(p => p.PalestrantesEventos!).ThenInclude(pe => pe.Evento);
         }
-        query.OrderBy(p => p.Id);        
+        query.OrderBy(p => p.Id);
 
         return await query.ToArrayAsync();
     }
 
     public async Task<PalestranteModel[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos = false)
     {
-        IQueryable<PalestranteModel> query = _context.Palestrantes.Include(p => p.RedesSociais);
+        IQueryable<PalestranteModel> query = _context.Palestrantes.AsNoTracking().Include(p => p.RedesSociais);
 
         if (includeEventos)
         {
-            query = query.Include(p => p.PalestratesEventos!).ThenInclude(pe => pe.Evento);
+            query = query.Include(p => p.PalestrantesEventos!).ThenInclude(pe => pe.Evento);
         }
-        query.OrderBy(p => p.Id).Where(p => p.Nome!.ToLower().Contains(nome.ToLower()));
+        query = query.Where(p => p.Nome.ToLower().Contains(nome.ToLower())).OrderBy(p => p.Id);
 
         return await query.ToArrayAsync();
     }
@@ -44,14 +43,14 @@ public class PalestrantePersist : IPalestrantePersistence
 
     public async Task<PalestranteModel> GetPalestranteByIdAsync(int palestranteId, bool includeEventos = false)
     {
-        IQueryable<PalestranteModel> query = _context.Palestrantes.Include(p => p.RedesSociais);
+        IQueryable<PalestranteModel> query = _context.Palestrantes.AsNoTracking().Include(p => p.RedesSociais);
 
         if (includeEventos)
         {
-            query = query.Include(e => e.PalestratesEventos!).ThenInclude(pe => pe.Evento);
+            query = query.Include(e => e.PalestrantesEventos!).ThenInclude(pe => pe.Evento);
         }
         query = query.OrderBy(p => p.Id).Where(p => p.Id == palestranteId);
-        
+
         var palestrante = await query.FirstOrDefaultAsync();
         if (palestrante == null)
         {

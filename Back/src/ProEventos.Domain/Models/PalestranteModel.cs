@@ -1,3 +1,5 @@
+namespace ProEventos.Domain.Models;
+
 public class PalestranteModel
 {
     public int Id { get; set; }
@@ -7,5 +9,5 @@ public class PalestranteModel
     public string? Telefone { get; set; }
     public string? Email { get; set; }
     public IEnumerable<RedeSocialModel>? RedesSociais { get; set; }
-    public IEnumerable<PalestrateEventoModel>? PalestratesEventos { get; set; }
+    public IEnumerable<PalestranteEventoModel>? PalestrantesEventos { get; set; }
 }

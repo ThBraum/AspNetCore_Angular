@@ -6,35 +6,30 @@ using ProEventos.Persistence.Contratos;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adicione serviços ao contêiner.
-builder.Services.AddDbContext<ProEventosContext>(
+// Add services to the container.
+builder.Services.AddDbContext<ProEventosContext>( //Adiciona o contexto do banco de dados
     context => context.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-builder.Services.AddScoped<IEventoService, EventoService>();
+builder.Services.AddScoped<IEventoService, EventoService>(); //Se um controller pedir um IEventoService, vai receber um EventoService
 builder.Services.AddScoped<IGeralPersistence, GeralPersist>();
 builder.Services.AddScoped<IEventoPersistence, EventoPersist>();
 
-builder.Services.AddControllers();
-
-// Configure o Swagger
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new() { Title = "Your API Name", Version = "v1" });
-});
+builder.Services.AddControllers().AddNewtonsoftJson(
+    x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //Mapeamento automático
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer(); 
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure o pipeline de solicitações HTTP.
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // Configurar o Swagger UI com opções específicas
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name v1");
-        c.RoutePrefix = string.Empty; // Isso tornará o Swagger UI disponível na raiz do aplicativo
-    });
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
