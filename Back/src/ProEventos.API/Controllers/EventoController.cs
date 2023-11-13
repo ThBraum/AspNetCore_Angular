@@ -112,26 +112,4 @@ public class EventoController : Controller
             throw new Exception(e.Message);
         }
     }
-
-    [HttpDelete("deleteAll", Name = "DeleteAllEventos")]
-    public async Task<IActionResult> DeleteAll()
-    {
-        try
-        {
-            if (await _eventoService.DeleteAllEventos())
-            {
-                return Ok("Deletado");
-            }
-            else
-            {
-                return BadRequest("Eventos não deletados");
-            }
-        }
-        catch (System.Exception e)
-        {
-
-            throw new Exception(e.Message);
-        }
-    }
-
 }
