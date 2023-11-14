@@ -13,12 +13,13 @@ public class EventoDto //Não expoe o que dominio possui para quem consumir
     public string Tema { get; set; }
     [Range(1, 120000, 
     ErrorMessage = "O campo {0} deve ter no mínimo 1 e no máximo 120.000")]
-    [DefaultValue(0)]
+    [DefaultValue(1)]
     public int QtdPessoas { get; set; }
-    [RegularExpression(@"([^\s]+(\.(?i)(jpe?g|png|gif|bmp))$)",
+    [RegularExpression(@".*\.(gif|jpe?g|bmp|png)$",
     ErrorMessage = "Não é uma imagem válida. (gif, jpg, jpeg, bmp ou png)")]
-    public string ImageURL { get; set; }
-    [Phone(ErrorMessage = "O campo {0} está em formato inválido"), 
+    [DefaultValue("foto.png")]
+    public string ImagemURL { get; set; }
+    [Phone(ErrorMessage = "O campo {0} está em formato inválido"),
     DefaultValue("(00) 00000-0000")]
     public string Telefone { get; set; }
     [Display(Name = "e-mail"),

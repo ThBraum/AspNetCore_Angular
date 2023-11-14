@@ -29,7 +29,7 @@ namespace ProEventos.Persistence.Migrations
                     b.Property<DateTime>("DataInicio")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("EventoId")
+                    b.Property<int>("EventoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nome")
@@ -50,10 +50,10 @@ namespace ProEventos.Persistence.Migrations
 
             modelBuilder.Entity("PalestranteEventoModel", b =>
                 {
-                    b.Property<int?>("EventoId")
+                    b.Property<int>("EventoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("PalestranteId")
+                    b.Property<int>("PalestranteId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("EventoId", "PalestranteId");
@@ -75,7 +75,7 @@ namespace ProEventos.Persistence.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ImageURL")
+                    b.Property<string>("ImagemURL")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Local")
@@ -105,9 +105,6 @@ namespace ProEventos.Persistence.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
-
-                    b.Property<int?>("EventoId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ImagemURL")
                         .HasColumnType("TEXT");
@@ -158,7 +155,8 @@ namespace ProEventos.Persistence.Migrations
                     b.HasOne("ProEventos.Domain.Models.EventoModel", "Evento")
                         .WithMany("Lotes")
                         .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Evento");
                 });

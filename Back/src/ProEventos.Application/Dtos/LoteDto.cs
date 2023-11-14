@@ -9,6 +9,6 @@ public class LoteDto
     public DateTime DataInicio { get; set; }
     public DateTime DataFim { get; set; }
     public int Quantidade { get; set; }
-    public int? EventoId { get; set; }
-    public EventoDto? Evento { get; set; }
+    public int EventoId { get; set; }
+    public EventoDto Evento { get; set; }
 }

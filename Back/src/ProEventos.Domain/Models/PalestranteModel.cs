@@ -10,7 +10,6 @@ public class PalestranteModel
     public string ImagemURL { get; set; }
     public string Telefone { get; set; }
     public string Email { get; set; }
-    public int? EventoId { get; set; }
     public IEnumerable<RedeSocialModel> RedesSociais { get; set; }
     public IEnumerable<PalestranteEventoModel> PalestrantesEventos { get; set; }
 }

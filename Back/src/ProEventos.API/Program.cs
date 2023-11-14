@@ -15,6 +15,18 @@ builder.Services.AddScoped<IEventoService, EventoService>(); //Se um controller 
 builder.Services.AddScoped<IGeralPersistence, GeralPersist>();
 builder.Services.AddScoped<IEventoPersistence, EventoPersist>();
 
+builder.Services.AddCors(options => //Configuração do CORS
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+
 builder.Services.AddControllers().AddNewtonsoftJson(
     x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
@@ -35,6 +47,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("CorsPolicy"); //Configuração do CORS
 
 app.MapControllers();
 

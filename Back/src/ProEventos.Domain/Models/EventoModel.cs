@@ -13,7 +13,7 @@ public class EventoModel
     [Required, MaxLength(50)]
     public string Tema { get; set; }
     public int QtdPessoas { get; set; }
-    public string ImageURL { get; set; }
+    public string ImagemURL { get; set; }
     public string Telefone { get; set; }
     public string Email { get; set; }
     public IEnumerable<LoteModel> Lotes { get; set; }

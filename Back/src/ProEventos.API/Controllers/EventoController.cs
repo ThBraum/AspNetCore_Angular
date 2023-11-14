@@ -3,6 +3,7 @@ using ProEventos.Application.Dtos;
 using ProEventos.Domain.Models;
 
 namespace ProEventos.API.Controllers;
+[ApiController]
 [Route("api/[controller]")]
 public class EventoController : Controller
 {

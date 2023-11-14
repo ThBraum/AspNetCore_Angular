@@ -34,7 +34,6 @@ public class EventoService : IEventoService
         }
         catch (System.Exception e)
         {
-
             throw new Exception(e.Message);
         }
     }

@@ -19,7 +19,7 @@ namespace ProEventos.Persistence.Migrations
                     DataEvento = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Tema = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     QtdPessoas = table.Column<int>(type: "INTEGER", nullable: false),
-                    ImageURL = table.Column<string>(type: "TEXT", nullable: true),
+                    ImagemURL = table.Column<string>(type: "TEXT", nullable: true),
                     Telefone = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -38,8 +38,7 @@ namespace ProEventos.Persistence.Migrations
                     MiniCurriculo = table.Column<string>(type: "TEXT", nullable: true),
                     ImagemURL = table.Column<string>(type: "TEXT", nullable: true),
                     Telefone = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    EventoId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Email = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,7 +56,7 @@ namespace ProEventos.Persistence.Migrations
                     DataInicio = table.Column<DateTime>(type: "TEXT", nullable: false),
                     DataFim = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Quantidade = table.Column<int>(type: "INTEGER", nullable: false),
-                    EventoId = table.Column<int>(type: "INTEGER", nullable: true)
+                    EventoId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

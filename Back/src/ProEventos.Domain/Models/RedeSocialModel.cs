@@ -7,8 +7,8 @@ public class RedeSocialModel
     public string Nome { get; set; }
     public string URL { get; set; }
     public int? EventoId { get; set; }
-    public int? PalestranteId { get; set; }
     public EventoModel Evento { get; set; }
-    [ForeignKey("PalestranteId")]
+    public int? PalestranteId { get; set; }
+    //[ForeignKey("PalestranteId")]
     public PalestranteModel Palestrante { get; set; }
 }

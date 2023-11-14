@@ -51,8 +51,6 @@ public class EventoPersist : IEventoPersistence
             query = query.Include(e => e.PalestrantesEventos!).ThenInclude(pe => pe.Palestrante);
         }
         query = query.Where(e => e.Id == eventoId).OrderBy(e => e.Id);
-        var evento = await query.FirstOrDefaultAsync();
-
-        return evento;
+        return await query.FirstOrDefaultAsync();
     }
 }
