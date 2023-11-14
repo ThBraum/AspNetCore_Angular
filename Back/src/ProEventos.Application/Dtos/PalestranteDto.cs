@@ -1,8 +1,5 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ProEventos.Domain.Models;
-
-public class PalestranteModel
+namespace ProEventos.Application.Dtos;
+public class PalestranteDto
 {
     public int Id { get; set; }
     public string Nome { get; set; }
@@ -11,6 +8,6 @@ public class PalestranteModel
     public string Telefone { get; set; }
     public string Email { get; set; }
     public int? EventoId { get; set; }
-    public IEnumerable<RedeSocialModel> RedesSociais { get; set; }
-    public IEnumerable<PalestranteEventoModel> PalestrantesEventos { get; set; }
+    public IEnumerable<RedeSocialDto> RedesSociais { get; set; }
+    public IEnumerable<PalestranteDto> Palestrantes { get; set; }
 }

@@ -18,7 +18,7 @@ public class EventoController : Controller
         try
         {
             var eventos = await _eventoService.GetAllEventosAsync(true);
-            if (eventos == null) return NotFound("Nenhum evento encontrado");
+            if (eventos == null) return NoContent();
 
             return Ok(eventos);
         }
@@ -34,7 +34,7 @@ public class EventoController : Controller
         try
         {
             var evento = await _eventoService.GetEventoByIdAsync(id, true);
-            if (evento == null) return Ok(new { Mensagem = "Nenhum evento encontrado" });
+            if (evento == null) return NoContent();
 
             return Ok(evento);
         }
@@ -50,7 +50,7 @@ public class EventoController : Controller
         try
         {
             var evento = await _eventoService.GetAllEventosByTemaAsync(tema, true);
-            if (evento == null) return NotFound("Nenhum evento encontrado");
+            if (evento == null) return NoContent();
 
             return Ok(evento);
         }
@@ -82,7 +82,7 @@ public class EventoController : Controller
         try
         {
             var evento = await _eventoService.GetEventoByIdAsync(id, true);
-            if (evento == null) return NotFound("Nenhum evento encontrado");
+            if (evento == null) return NoContent();
 
             var eventoRetorno = await _eventoService.UpdateEvento(id, model);
             if (eventoRetorno == null) return BadRequest("Erro ao tentar atualizar evento");
@@ -101,7 +101,7 @@ public class EventoController : Controller
         try
         {
             var evento = await _eventoService.GetEventoByIdAsync(id, true);
-            if (evento == null) return NotFound("Nenhum evento encontrado");
+            if (evento == null) return NoContent();
 
             if (await _eventoService.DeleteEvento(id)) return Ok(evento);
             
