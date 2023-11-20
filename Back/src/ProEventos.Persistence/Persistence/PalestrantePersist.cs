@@ -35,7 +35,7 @@ public class PalestrantePersist : IPalestrantePersistence
         {
             query = query.Include(p => p.PalestrantesEventos!).ThenInclude(pe => pe.Evento);
         }
-        query = query.Where(p => p.Nome.ToLower().Contains(nome.ToLower())).OrderBy(p => p.Id);
+        query = query.Where(p => p.User.PrimeiroNome.ToLower().Contains(nome.ToLower())).OrderBy(p => p.Id);
 
         return await query.ToArrayAsync();
     }

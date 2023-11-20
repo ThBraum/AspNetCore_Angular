@@ -1,3 +1,5 @@
+using System;
+using Microsoft.AspNetCore.Http;
 using ProEventos.Application.Dtos;
 
 public interface IEventoService
@@ -8,4 +10,6 @@ public interface IEventoService
     Task<EventoDto[]> GetAllEventosByTemaAsync(string tema, bool includePalestrantes = false);
     Task<EventoDto[]> GetAllEventosAsync(bool includePalestrantes = false);
     Task<EventoDto> GetEventoByIdAsync(int eventoId, bool includePalestrantes = false);
+    void DeleteImage(string imageName);
+    Task<string> SaveImage(IFormFile image);
 }

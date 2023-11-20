@@ -1,4 +1,6 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using ProEventos.Application.Dtos;
 using ProEventos.Domain.Models;
 using ProEventos.Persistence.Contratos;
@@ -10,8 +12,10 @@ public class EventoService : IEventoService
     private readonly IGeralPersistence _geralPersistence;
     private readonly IEventoPersistence _eventoPersistence;
     private readonly IMapper _mapper;
-    public EventoService(IGeralPersistence geralPersistence, IEventoPersistence eventoPersistence, IMapper mapper)
+    private readonly IWebHostEnvironment _hostEnvironment;
+    public EventoService(IGeralPersistence geralPersistence, IEventoPersistence eventoPersistence, IMapper mapper, IWebHostEnvironment hostEnvironment)
     {
+        _hostEnvironment = hostEnvironment;
         _eventoPersistence = eventoPersistence;
         _geralPersistence = geralPersistence;
         _mapper = mapper;
@@ -22,8 +26,8 @@ public class EventoService : IEventoService
     {
         try
         {
-           var evento = _mapper.Map<EventoModel>(model);
-           
+            var evento = _mapper.Map<EventoModel>(model);
+
             _geralPersistence.Add<EventoModel>(evento);
             if (await _geralPersistence.SaveChangesAsync())
             {
@@ -44,7 +48,7 @@ public class EventoService : IEventoService
         {
             var evento = await _eventoPersistence.GetEventoByIdAsync(EventoId, false);
             if (evento == null) throw new Exception("Evento não encontrado");
-            model.Id = EventoId; 
+            model.Id = EventoId;
 
             _mapper.Map(model, evento); //Mapeia o model para o evento
 
@@ -127,5 +131,27 @@ public class EventoService : IEventoService
         {
             throw new Exception(e.Message);
         }
+    }
+
+    public void DeleteImage(string imageName)
+    {
+        var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/Images", imageName);
+        if (System.IO.File.Exists(imagePath))
+            System.IO.File.Delete(imagePath);
+    }
+
+    public async Task<string> SaveImage(IFormFile image)
+    {
+        string imageName = new String(Path.GetFileNameWithoutExtension(image.FileName)
+                                        .Take(10).ToArray()).Replace(' ', '-');
+        imageName = $"{imageName}{DateTime.UtcNow.ToString("yymmssfff")}{Path.GetExtension(image.FileName)}";
+
+        var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/Images", imageName);
+        using (var fileStream = new FileStream(imagePath, FileMode.Create))
+        {
+            await image.CopyToAsync(fileStream);
+        }
+
+        return imageName;
     }
 }

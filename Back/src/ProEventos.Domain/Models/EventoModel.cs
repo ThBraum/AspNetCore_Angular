@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ProEventos.Domain.Identity;
 
 namespace ProEventos.Domain.Models;
 
@@ -16,6 +17,8 @@ public class EventoModel
     public string ImagemURL { get; set; }
     public string Telefone { get; set; }
     public string Email { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; }
     public IEnumerable<LoteModel> Lotes { get; set; }
     public IEnumerable<RedeSocialModel> RedesSociais { get; set; }
     public IEnumerable<PalestranteEventoModel> PalestrantesEventos { get; set; }

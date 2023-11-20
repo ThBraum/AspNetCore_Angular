@@ -9,6 +9,5 @@ public class RedeSocialModel
     public int? EventoId { get; set; }
     public EventoModel Evento { get; set; }
     public int? PalestranteId { get; set; }
-    //[ForeignKey("PalestranteId")]
     public PalestranteModel Palestrante { get; set; }
 }

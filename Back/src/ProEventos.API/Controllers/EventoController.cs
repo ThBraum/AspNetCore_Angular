@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using ProEventos.Application.Dtos;
-using ProEventos.Domain.Models;
 
 namespace ProEventos.API.Controllers;
 [ApiController]
@@ -8,8 +7,10 @@ namespace ProEventos.API.Controllers;
 public class EventoController : Controller
 {
     private readonly IEventoService _eventoService;
-    public EventoController(IEventoService eventoService)
+    private readonly IWebHostEnvironment _hostEnvironment;
+    public EventoController(IEventoService eventoService, IWebHostEnvironment hostEnvironment)
     {
+        _hostEnvironment = hostEnvironment;
         _eventoService = eventoService;
     }
 
@@ -77,6 +78,29 @@ public class EventoController : Controller
         }
     }
 
+    [HttpPost("upload-image/{eventoId}", Name = "UploadImage")]
+    public async Task<ActionResult<EventoDto>> UploadImage(int eventoId)
+    {
+        try
+        {
+            var evento = await _eventoService.GetEventoByIdAsync(eventoId, true);
+            if (evento == null) return NoContent();
+            var file = Request.Form.Files[0];
+            if (file.Length > 0)
+            {
+                _eventoService.DeleteImage(evento.ImagemURL);
+                evento.ImagemURL = await _eventoService.SaveImage(file);
+            }
+            var eventoRetorno = await _eventoService.UpdateEvento(eventoId, evento);
+            if (eventoRetorno == null) return BadRequest("Erro ao tentar atualizar evento");
+            return Ok(eventoRetorno);
+        }
+        catch (System.Exception e)
+        {
+            return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro {e.Message}");
+        }
+    }
+
     [HttpPut("{id}", Name = "UpdateEvento")]
     public async Task<ActionResult<EventoDto>> Put(int id, [FromBody] EventoDto model)
     {
@@ -105,7 +129,7 @@ public class EventoController : Controller
             if (evento == null) return NoContent();
 
             if (await _eventoService.DeleteEvento(id)) return Ok(evento);
-            
+
             return BadRequest("Evento não deletado");
         }
         catch (System.Exception e)
