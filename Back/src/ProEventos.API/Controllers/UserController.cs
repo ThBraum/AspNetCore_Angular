@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using ProEventos.API.Extensions;
 using ProEventos.Application.Contratos;
 using ProEventos.Application.Dtos;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace ProEventos.API.Controllers;
 [Authorize]
@@ -38,10 +37,6 @@ public class UserController : ControllerBase
 
     [HttpPost("Register", Name = "RegisterUser")]
     [AllowAnonymous]
-    [SwaggerOperation(
-        Summary = "Registra um novo usuário",
-        Description = "Endpoint para registrar um novo usuário"
-    )]
     public async Task<IActionResult> Register(UserDto userDto)
     {
         try
