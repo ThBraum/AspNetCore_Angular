@@ -9,10 +9,10 @@ namespace ProEventos.Application;
 public class UserService : IUserService
 {
     private readonly IMapper _mapper;
-    private readonly IUserPersist _userPersist;
+    private readonly IUserPersistence _userPersist;
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
-    public UserService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUserPersist userPersist)
+    public UserService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUserPersistence userPersist)
     {
         _userPersist = userPersist;
         _mapper = mapper;
@@ -77,20 +77,24 @@ public class UserService : IUserService
         {
             var user = await _userPersist.GetUserByUsernameAsync(userUpdateDto.Username);
             if (user == null) return null;
+            userUpdateDto.Id = user.Id;
 
             _mapper.Map(userUpdateDto, user);
 
-
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var result = await _userManager.ResetPasswordAsync(user, token, userUpdateDto.Password);
+            if (userUpdateDto.Password != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var result = await _userManager.ResetPasswordAsync(user, token, userUpdateDto.Password);
+            }
 
             _userPersist.Update<User>(user);
 
-            if (result.Succeeded)
+            if (await _userPersist.SaveChangesAsync())
             {
-                var userToReturn = await _userPersist.GetUserByUsernameAsync(userUpdateDto.Username);
+                var userToReturn = await _userPersist.GetUserByUsernameAsync(user.UserName);
                 return _mapper.Map<UserUpdateDto>(userToReturn);
             }
+
             return null;
         }
         catch (System.Exception e)
