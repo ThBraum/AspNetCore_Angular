@@ -4,7 +4,7 @@ using ProEventos.Persistence.Context;
 using ProEventos.Persistence.Contratos;
 
 namespace ProEventos.Persistence.Persistence;
-public class UserPersist : GeralPersist, IUserPersist //herda de GeralPersist e implementa IUserPersist
+public class UserPersist : GeralPersist, IUserPersistence //herda de GeralPersist e implementa IUserPersist
 {
     private readonly ProEventosContext _context;
     public UserPersist(ProEventosContext context) : base(context)
