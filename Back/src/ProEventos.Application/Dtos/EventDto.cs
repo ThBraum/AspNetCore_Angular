@@ -26,6 +26,8 @@ public class EventoDto //Não expoe o que dominio possui para quem consumir
     EmailAddress(ErrorMessage = "O campo {0} está em formato inválido"),
     Required(ErrorMessage = "O campo {0} é obrigatório")]
     public string Email { get; set; }
+    public int UserId { get; set; }
+    public UserDto UserDto { get; set; }
     public IEnumerable<LoteDto> Lotes { get; set; }
     public IEnumerable<RedeSocialDto> RedesSociais { get; set; }
     public IEnumerable<PalestranteDto> PalestrantesEventos { get; set; }

@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using ProEventos.API.Extensions;
+using ProEventos.Application.Contratos;
 using ProEventos.Application.Dtos;
 
 namespace ProEventos.API.Controllers;
@@ -8,8 +10,10 @@ public class EventoController : Controller
 {
     private readonly IEventoService _eventoService;
     private readonly IWebHostEnvironment _hostEnvironment;
-    public EventoController(IEventoService eventoService, IWebHostEnvironment hostEnvironment)
+    private readonly IUserService _userService;
+    public EventoController(IEventoService eventoService, IWebHostEnvironment hostEnvironment, IUserService userService)
     {
+        _userService = userService;
         _hostEnvironment = hostEnvironment;
         _eventoService = eventoService;
     }
@@ -19,7 +23,7 @@ public class EventoController : Controller
     {
         try
         {
-            var eventos = await _eventoService.GetAllEventosAsync(true);
+            var eventos = await _eventoService.GetAllEventosAsync(User.GetUserId(), true);
             if (eventos == null) return NoContent();
 
             return Ok(eventos);
@@ -35,7 +39,7 @@ public class EventoController : Controller
     {
         try
         {
-            var evento = await _eventoService.GetEventoByIdAsync(id, true);
+            var evento = await _eventoService.GetEventoByIdAsync(User.GetUserId(), id, true);
             if (evento == null) return NoContent();
 
             return Ok(evento);
@@ -51,7 +55,7 @@ public class EventoController : Controller
     {
         try
         {
-            var evento = await _eventoService.GetAllEventosByTemaAsync(tema, true);
+            var evento = await _eventoService.GetAllEventosByTemaAsync(User.GetUserId(), tema, true);
             if (evento == null) return NoContent();
 
             return Ok(evento);
@@ -67,7 +71,7 @@ public class EventoController : Controller
     {
         try
         {
-            var evento = await _eventoService.AddEvento(model);
+            var evento = await _eventoService.AddEvento(User.GetUserId(), model);
             if (evento == null) return BadRequest("Erro ao tentar adicionar evento");
 
             return Ok(evento);
@@ -83,15 +87,15 @@ public class EventoController : Controller
     {
         try
         {
-            var evento = await _eventoService.GetEventoByIdAsync(eventoId, true);
+            var evento = await _eventoService.GetEventoByIdAsync(User.GetUserId(), eventoId, true);
             if (evento == null) return NoContent();
             var file = Request.Form.Files[0];
             if (file.Length > 0)
             {
-                _eventoService.DeleteImage(evento.ImagemURL);
+                _eventoService.DeleteImage(User.GetUserId(), evento.ImagemURL);
                 evento.ImagemURL = await _eventoService.SaveImage(file);
             }
-            var eventoRetorno = await _eventoService.UpdateEvento(eventoId, evento);
+            var eventoRetorno = await _eventoService.UpdateEvento(User.GetUserId(), eventoId, evento);
             if (eventoRetorno == null) return BadRequest("Erro ao tentar atualizar evento");
             return Ok(eventoRetorno);
         }
@@ -106,10 +110,10 @@ public class EventoController : Controller
     {
         try
         {
-            var evento = await _eventoService.GetEventoByIdAsync(id, true);
+            var evento = await _eventoService.GetEventoByIdAsync(User.GetUserId(), id, true);
             if (evento == null) return NoContent();
 
-            var eventoRetorno = await _eventoService.UpdateEvento(id, model);
+            var eventoRetorno = await _eventoService.UpdateEvento(User.GetUserId(), id, model);
             if (eventoRetorno == null) return BadRequest("Erro ao tentar atualizar evento");
 
             return Ok(eventoRetorno);
@@ -125,10 +129,10 @@ public class EventoController : Controller
     {
         try
         {
-            var evento = await _eventoService.GetEventoByIdAsync(id, true);
+            var evento = await _eventoService.GetEventoByIdAsync(User.GetUserId(), id, true);
             if (evento == null) return NoContent();
 
-            if (await _eventoService.DeleteEvento(id)) return Ok(evento);
+            if (await _eventoService.DeleteEvento(User.GetUserId(), id)) return Ok(evento);
 
             return BadRequest("Evento não deletado");
         }
